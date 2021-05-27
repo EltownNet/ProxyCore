@@ -1,6 +1,5 @@
 prefix: "&8» &fCore &8| &7"
 
-chat.prefix.ADMIN: "&4Admin &8| &7[0] &8» &f[1]"
-
-player.not.found: "&cDer angegebene Spieler konnte nicht gefunden werden."
+player.not.found: "&7Der Spieler &a[0] &7konnte nicht gefunden werden."
+player.same.server: "&a[0] &7befindet sich bereits auf deinem Server."
 whereis.info: "&e[0] &abefindet sich auf dem Server &7[1]&a."

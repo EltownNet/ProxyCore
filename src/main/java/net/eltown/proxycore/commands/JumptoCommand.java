@@ -14,8 +14,9 @@ public class JumptoCommand extends Command {
 
     public JumptoCommand(final ProxyCore proxyCore) {
         super("jumpto", CommandSettings.builder()
-                .setDescription("Springe Spielern auf anderen Unterservern hinterher.")
+                .setDescription("Springe einem Spieler auf einem anderen Unterserver hinterher")
                 .setPermission("proxycore.command.jumpto")
+                .setUsageMessage("jumpto <Spieler>")
                 .build());
         this.proxyCore = proxyCore;
     }
@@ -26,9 +27,13 @@ public class JumptoCommand extends Command {
             if (args.length == 1) {
                 final ProxiedPlayer player = this.proxyCore.getProxy().getPlayer(args[0]);
                 if (player != null) {
-                    final ServerInfo serverInfo = player.getServerInfo();
-                    ((ProxiedPlayer) sender).redirectServer(serverInfo);
-                } else sender.sendMessage(Language.get("player.not.found"));
+                    final ServerInfo targetServerInfo = player.getServerInfo();
+                    final ServerInfo senderServerInfo = ((ProxiedPlayer) sender).getServerInfo();
+                    if (targetServerInfo != senderServerInfo) {
+                        ((ProxiedPlayer) sender).redirectServer(targetServerInfo);
+                    } else sender.sendMessage(Language.get("player.same.server", args[0]));
+                } else sender.sendMessage(Language.get("player.not.found", args[0]));
+                return true;
             }
         }
         return false;

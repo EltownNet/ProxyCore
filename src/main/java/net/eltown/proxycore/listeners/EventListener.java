@@ -6,7 +6,6 @@ import dev.waterdog.player.ProxiedPlayer;
 import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.GroupCalls;
-import net.eltown.proxycore.components.language.Language;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,7 +21,9 @@ public class EventListener {
                 switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
                     case CALLBACK_FULL_GROUP_PLAYER:
                         final String group = delivery.getData()[1];
+                        final String prefix = delivery.getData()[2];
                         this.instance.cachedRankedPlayers.put(player.getName(), group);
+                        this.instance.cachedGroupPrefix.put(group, prefix);
                         break;
                 }
             }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
@@ -34,8 +35,8 @@ public class EventListener {
         final String message = event.getMessage();
 
         this.instance.getProxy().getPlayers().values().forEach(e -> {
-            e.sendMessage(Language.getNP("chat.prefix." + this.instance.cachedRankedPlayers.get(player.getName()), player.getName(), message));
-            this.instance.getLogger().info(Language.getNP("chat.prefix." + this.instance.cachedRankedPlayers.get(player.getName()), player.getName(), message));
+            e.sendMessage(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
+            this.instance.getLogger().info(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
         });
 
         event.setCancelled(true);

@@ -16,19 +16,21 @@ public class WhereisCommand  extends Command {
         super("whereis", CommandSettings.builder()
                 .setDescription("Finde einen Spieler auf einem Unterserver.")
                 .setPermission("proxycore.command.whereis")
+                .setUsageMessage("whereis <Spieler>")
                 .build());
         this.proxyCore = proxyCore;
     }
 
     @Override
     public boolean onExecute(CommandSender sender, String s, String[] args) {
-        if (sender.hasPermission(this.getPermission()) && sender instanceof ProxiedPlayer) {
+        if (sender.hasPermission(this.getPermission())) {
             if (args.length == 1) {
                 final ProxiedPlayer player = this.proxyCore.getProxy().getPlayer(args[0]);
                 if (player != null) {
                     final ServerInfo serverInfo = player.getServerInfo();
                     sender.sendMessage(Language.get("whereis.info", args[0], serverInfo.getServerName()));
                 } else sender.sendMessage(Language.get("player.not.found"));
+                return true;
             }
         }
         return false;

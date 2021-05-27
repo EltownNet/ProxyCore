@@ -4,6 +4,7 @@ import dev.waterdog.event.defaults.PlayerChatEvent;
 import dev.waterdog.event.defaults.PlayerLoginEvent;
 import dev.waterdog.plugin.Plugin;
 import lombok.Getter;
+import net.eltown.proxycore.commands.AnnounceCommand;
 import net.eltown.proxycore.commands.BringmeCommand;
 import net.eltown.proxycore.commands.JumptoCommand;
 import net.eltown.proxycore.commands.WhereisCommand;
@@ -26,6 +27,7 @@ public class ProxyCore extends Plugin {
     private MessageListener messageListener;
 
     public final HashMap<String, String> cachedRankedPlayers = new HashMap<>();
+    public final HashMap<String, String> cachedGroupPrefix = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -45,9 +47,10 @@ public class ProxyCore extends Plugin {
         this.getProxy().getEventManager().subscribe(PlayerLoginEvent.class, this.listener::onLogin);
         this.getProxy().getEventManager().subscribe(PlayerChatEvent.class, this.listener::onChat);
 
-        this.getProxy().getCommandMap().registerCommand(new JumptoCommand(this));
-        this.getProxy().getCommandMap().registerCommand(new BringmeCommand(this));
-        this.getProxy().getCommandMap().registerCommand(new WhereisCommand(this));
+        this.getProxy().getCommandMap().registerCommand("jumpto", new JumptoCommand(this));
+        this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
+        this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
+        this.getProxy().getCommandMap().registerCommand("announce", new AnnounceCommand(this));
     }
 
     public String createId(final int i) {
