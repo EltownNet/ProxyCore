@@ -1,10 +1,10 @@
 package net.eltown.proxycore.commands;
 
-import dev.waterdog.command.Command;
-import dev.waterdog.command.CommandSender;
-import dev.waterdog.command.CommandSettings;
-import dev.waterdog.network.ServerInfo;
-import dev.waterdog.player.ProxiedPlayer;
+import dev.waterdog.waterdogpe.command.Command;
+import dev.waterdog.waterdogpe.command.CommandSender;
+import dev.waterdog.waterdogpe.command.CommandSettings;
+import dev.waterdog.waterdogpe.network.ServerInfo;
+import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
 

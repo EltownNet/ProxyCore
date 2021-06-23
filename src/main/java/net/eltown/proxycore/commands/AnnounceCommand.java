@@ -1,8 +1,8 @@
 package net.eltown.proxycore.commands;
 
-import dev.waterdog.command.Command;
-import dev.waterdog.command.CommandSender;
-import dev.waterdog.command.CommandSettings;
+import dev.waterdog.waterdogpe.command.Command;
+import dev.waterdog.waterdogpe.command.CommandSender;
+import dev.waterdog.waterdogpe.command.CommandSettings;
 import net.eltown.proxycore.ProxyCore;
 
 public class AnnounceCommand extends Command {

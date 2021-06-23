@@ -4,12 +4,12 @@ import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.GroupCalls;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 
-public class MessageListener {
+public class GroupListener {
 
     private final ProxyCore instance;
     private final TinyRabbitListener listener;
 
-    public MessageListener(final ProxyCore instance) {
+    public GroupListener(final ProxyCore instance) {
         this.instance = instance;
         this.listener = new TinyRabbitListener("localhost");
         this.listener.throwExceptions(true);

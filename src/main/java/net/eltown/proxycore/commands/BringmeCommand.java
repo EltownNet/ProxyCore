@@ -1,10 +1,10 @@
 package net.eltown.proxycore.commands;
 
-import dev.waterdog.command.Command;
-import dev.waterdog.command.CommandSender;
-import dev.waterdog.command.CommandSettings;
-import dev.waterdog.network.ServerInfo;
-import dev.waterdog.player.ProxiedPlayer;
+import dev.waterdog.waterdogpe.command.Command;
+import dev.waterdog.waterdogpe.command.CommandSender;
+import dev.waterdog.waterdogpe.command.CommandSettings;
+import dev.waterdog.waterdogpe.network.ServerInfo;
+import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
 
@@ -30,7 +30,7 @@ public class BringmeCommand extends Command {
                     final ServerInfo targetServerInfo = player.getServerInfo();
                     final ServerInfo senderServerInfo = ((ProxiedPlayer) sender).getServerInfo();
                     if (targetServerInfo != senderServerInfo) {
-                        player.redirectServer(senderServerInfo);
+                        player.connect(senderServerInfo);
                     } else sender.sendMessage(Language.get("player.same.server", args[0]));
                 } else sender.sendMessage(Language.get("player.not.found"));
                 return true;

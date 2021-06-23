@@ -1,8 +1,8 @@
 package net.eltown.proxycore.listeners;
 
-import dev.waterdog.event.defaults.PlayerChatEvent;
-import dev.waterdog.event.defaults.PlayerLoginEvent;
-import dev.waterdog.player.ProxiedPlayer;
+import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
+import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
+import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.GroupCalls;

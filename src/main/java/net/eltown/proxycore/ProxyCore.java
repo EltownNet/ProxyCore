@@ -1,15 +1,17 @@
 package net.eltown.proxycore;
 
-import dev.waterdog.event.defaults.PlayerChatEvent;
-import dev.waterdog.event.defaults.PlayerLoginEvent;
-import dev.waterdog.plugin.Plugin;
+import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
+import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
+import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
 import net.eltown.proxycore.commands.AnnounceCommand;
 import net.eltown.proxycore.commands.BringmeCommand;
 import net.eltown.proxycore.commands.JumptoCommand;
 import net.eltown.proxycore.commands.WhereisCommand;
 import net.eltown.proxycore.components.language.Language;
-import net.eltown.proxycore.components.messaging.MessageListener;
+import net.eltown.proxycore.components.messaging.CoreListener;
+import net.eltown.proxycore.components.messaging.GroupListener;
+import net.eltown.proxycore.components.messaging.TeleportationListener;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbit;
 import net.eltown.proxycore.listeners.EventListener;
 
@@ -23,8 +25,11 @@ import java.util.Random;
 public class ProxyCore extends Plugin {
 
     private EventListener listener;
+
     private TinyRabbit tinyRabbit;
-    private MessageListener messageListener;
+    private GroupListener groupListener;
+    private TeleportationListener teleportationListener;
+    private CoreListener coreListener;
 
     public final HashMap<String, String> cachedRankedPlayers = new HashMap<>();
     public final HashMap<String, String> cachedGroupPrefix = new HashMap<>();
@@ -33,7 +38,9 @@ public class ProxyCore extends Plugin {
     public void onEnable() {
         try {
             this.tinyRabbit = new TinyRabbit("localhost", "ProxyCore");
-            this.messageListener = new MessageListener(this);
+            this.groupListener = new GroupListener(this);
+            this.teleportationListener = new TeleportationListener(this);
+            this.coreListener = new CoreListener(this);
             this.loadPlugin();
         } catch (final Exception e) {
             e.printStackTrace();

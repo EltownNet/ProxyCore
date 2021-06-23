@@ -1,6 +1,6 @@
 package net.eltown.proxycore.components.language;
 
-import dev.waterdog.plugin.Plugin;
+import dev.waterdog.waterdogpe.plugin.Plugin;
 import net.eltown.proxycore.components.config.Config;
 
 import java.util.HashMap;
