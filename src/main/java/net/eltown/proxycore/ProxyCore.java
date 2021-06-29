@@ -8,6 +8,7 @@ import net.eltown.proxycore.commands.AnnounceCommand;
 import net.eltown.proxycore.commands.BringmeCommand;
 import net.eltown.proxycore.commands.JumptoCommand;
 import net.eltown.proxycore.commands.WhereisCommand;
+import net.eltown.proxycore.commands.discord.AuthCommand;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.messaging.CoreListener;
 import net.eltown.proxycore.components.messaging.GroupListener;
@@ -58,6 +59,8 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
         this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
         this.getProxy().getCommandMap().registerCommand("announce", new AnnounceCommand(this));
+
+        this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
     }
 
     public String createId(final int i) {

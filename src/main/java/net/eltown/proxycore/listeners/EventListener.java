@@ -16,17 +16,21 @@ public class EventListener {
 
     public void onLogin(final PlayerLoginEvent event) {
         CompletableFuture.runAsync(() -> {
-            final ProxiedPlayer player = event.getPlayer();
-            this.instance.getTinyRabbit().sendAndReceive((delivery -> {
-                switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
-                    case CALLBACK_FULL_GROUP_PLAYER:
-                        final String group = delivery.getData()[1];
-                        final String prefix = delivery.getData()[2];
-                        this.instance.cachedRankedPlayers.put(player.getName(), group);
-                        this.instance.cachedGroupPrefix.put(group, prefix);
-                        break;
-                }
-            }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
+            try {
+                final ProxiedPlayer player = event.getPlayer();
+                this.instance.getTinyRabbit().sendAndReceive((delivery -> {
+                    switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
+                        case CALLBACK_FULL_GROUP_PLAYER:
+                            final String group = delivery.getData()[1];
+                            final String prefix = delivery.getData()[2];
+                            this.instance.cachedRankedPlayers.put(player.getName(), group);
+                            this.instance.cachedGroupPrefix.put(group, prefix);
+                            break;
+                    }
+                }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 

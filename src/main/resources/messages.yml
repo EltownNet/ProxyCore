@@ -6,3 +6,8 @@ player.same.server: "&a[0] &7befindet sich bereits auf deinem Server."
 whereis.info: "&e[0] &abefindet sich auf dem Server &7[1]&a."
 
 tpa.notification: "&7Du hast eine Teleportationsanfrage von &a[0] &7erhalten! Lasse dir deine Anfragen mit &a/tpaccept &7anzeigen."
+
+token.invalid: "&7Der Token konnte nicht gefunden werden."
+token.already.auth: "&7Du bist bereits mit einem Account verbunden."
+token.success: "&7Du bist nun &aerfolgreich &7mit deinem Discord-Account verknüpft."
+token.usage: "&7Nutze: &a/auth <Token>"
