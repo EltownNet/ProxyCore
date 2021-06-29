@@ -1,13 +1,11 @@
 package net.eltown.proxycore;
 
 import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
+import dev.waterdog.waterdogpe.event.defaults.PlayerDisconnectEvent;
 import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
 import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
-import net.eltown.proxycore.commands.AnnounceCommand;
-import net.eltown.proxycore.commands.BringmeCommand;
-import net.eltown.proxycore.commands.JumptoCommand;
-import net.eltown.proxycore.commands.WhereisCommand;
+import net.eltown.proxycore.commands.*;
 import net.eltown.proxycore.commands.discord.AuthCommand;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.messaging.CoreListener;
@@ -54,11 +52,13 @@ public class ProxyCore extends Plugin {
         this.listener = new EventListener(this);
         this.getProxy().getEventManager().subscribe(PlayerLoginEvent.class, this.listener::onLogin);
         this.getProxy().getEventManager().subscribe(PlayerChatEvent.class, this.listener::onChat);
+        this.getProxy().getEventManager().subscribe(PlayerDisconnectEvent.class, this.listener::onQuit);
 
         this.getProxy().getCommandMap().registerCommand("jumpto", new JumptoCommand(this));
         this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
         this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
         this.getProxy().getCommandMap().registerCommand("announce", new AnnounceCommand(this));
+        this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
     }

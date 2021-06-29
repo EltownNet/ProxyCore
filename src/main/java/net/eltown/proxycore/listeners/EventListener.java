@@ -1,11 +1,13 @@
 package net.eltown.proxycore.listeners;
 
 import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
+import dev.waterdog.waterdogpe.event.defaults.PlayerDisconnectEvent;
 import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.GroupCalls;
+import net.eltown.proxycore.components.language.Language;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -15,9 +17,14 @@ public class EventListener {
     private final ProxyCore instance;
 
     public void onLogin(final PlayerLoginEvent event) {
+        final ProxiedPlayer player = event.getPlayer();
+
+        this.instance.getProxy().getPlayers().values().forEach((p) -> {
+            p.sendMessage(Language.getNP("player.joined", player.getName()));
+        });
+
         CompletableFuture.runAsync(() -> {
             try {
-                final ProxiedPlayer player = event.getPlayer();
                 this.instance.getTinyRabbit().sendAndReceive((delivery -> {
                     switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
                         case CALLBACK_FULL_GROUP_PLAYER:
@@ -31,6 +38,14 @@ public class EventListener {
             } catch (final Exception e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    public void onQuit(final PlayerDisconnectEvent event) {
+        final ProxiedPlayer player = event.getPlayer();
+
+        this.instance.getProxy().getPlayers().values().forEach((p) -> {
+            p.sendMessage(Language.getNP("player.quit", player.getName()));
         });
     }
 

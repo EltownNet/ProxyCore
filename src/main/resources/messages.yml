@@ -1,5 +1,10 @@
 prefix: "&8» &fCore &8| &7"
 
+player.joined: "§8» §f[0] §8| §7hat das Spiel betreten."
+player.quit: "§8» §f[0] §8| §7hat das Spiel verlassen."
+
+player.ping: "§7Dein Ping: [0][1]ms."
+
 player.not.found: "&7Der Spieler &a[0] &7konnte nicht gefunden werden."
 player.same.server: "&a[0] &7befindet sich bereits auf deinem Server."
 
