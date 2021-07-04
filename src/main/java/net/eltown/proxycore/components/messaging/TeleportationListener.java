@@ -25,7 +25,13 @@ public class TeleportationListener {
                 case REQUEST_TELEPORT:
                     final String[] d = delivery.getData();
                     final ProxiedPlayer player = this.instance.getProxy().getPlayer(d[1]);
-                    player.connect(this.instance.getProxy().getServerInfo(d[2]));
+                    if (!d[2].startsWith("to##")) {
+                        player.connect(this.instance.getProxy().getServerInfo(d[2]));
+                    } else {
+                        final String[] p = d[2].split("##");
+                        final ProxiedPlayer target = this.instance.getProxy().getPlayer(p[1]);
+                        player.connect(target.getServerInfo());
+                    }
                     break;
                 case REQUEST_TELEPORT_TPA:
                     final String[] g = delivery.getData();

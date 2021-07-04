@@ -39,6 +39,13 @@ public class CoreListener {
                     } catch (final Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+                case REQUEST_IS_PLAYER_ONLINE:
+                    final String target = delivery.getData()[1];
+                    final ProxiedPlayer player = this.instance.getProxy().getPlayer(target);
+                    if (player == null) delivery.answer(CoreCalls.CALLBACK_NULL.name(), "null");
+                    else delivery.answer(CoreCalls.CALLBACK_ONLINE.name(), "null");
+                    break;
 
             }
         }), "ProxyCore/Core/Listener", "proxy.callback");
