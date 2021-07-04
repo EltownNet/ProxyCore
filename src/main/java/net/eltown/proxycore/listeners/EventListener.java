@@ -55,8 +55,8 @@ public class EventListener {
 
         this.instance.getProxy().getPlayers().values().forEach(e -> {
             e.sendMessage(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
-            this.instance.getLogger().info(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
         });
+        this.instance.getLogger().info(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
 
         event.setCancelled(true);
     }
