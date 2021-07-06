@@ -29,9 +29,7 @@ public class EventListener {
                     switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
                         case CALLBACK_FULL_GROUP_PLAYER:
                             final String group = delivery.getData()[1];
-                            final String prefix = delivery.getData()[2];
                             this.instance.cachedRankedPlayers.put(player.getName(), group);
-                            this.instance.cachedGroupPrefix.put(group, prefix);
                             break;
                     }
                 }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
