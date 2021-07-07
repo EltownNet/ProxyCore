@@ -37,6 +37,10 @@ public class GroupListener {
                 case REQUEST_CHANGE_PLAYER_PREFIX:
                     this.instance.cachedRankedPlayers.put(delivery.getData()[1], delivery.getData()[2]);
                     break;
+                case REQUEST_CHANGE_PREFIX:
+                    this.instance.cachedGroupPrefix.remove(delivery.getData()[1]);
+                    this.instance.cachedGroupPrefix.put(delivery.getData()[1], delivery.getData()[2]);
+                    break;
             }
         }), "ProxyCore/GroupManager/Listener", "groups.extern");
     }
