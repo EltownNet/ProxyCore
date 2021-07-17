@@ -1,4 +1,4 @@
-package net.eltown.proxycore.commands;
+package net.eltown.proxycore.commands.administration;
 
 import dev.waterdog.waterdogpe.command.Command;
 import dev.waterdog.waterdogpe.command.CommandSender;
@@ -8,15 +8,15 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
 
-public class JumptoCommand extends Command {
+public class BringmeCommand extends Command {
 
     private final ProxyCore proxyCore;
 
-    public JumptoCommand(final ProxyCore proxyCore) {
-        super("jumpto", CommandSettings.builder()
-                .setDescription("Springe einem Spieler auf einem anderen Unterserver hinterher")
-                .setPermission("proxycore.command.jumpto")
-                .setUsageMessage("jumpto <Spieler>")
+    public BringmeCommand(final ProxyCore proxyCore) {
+        super("bringme", CommandSettings.builder()
+                .setDescription("Bringe einen Spieler von einem anderen Unterservern zu dir")
+                .setPermission("proxycore.command.bringme")
+                .setUsageMessage("bringme <Spieler>")
                 .build());
         this.proxyCore = proxyCore;
     }
@@ -30,9 +30,9 @@ public class JumptoCommand extends Command {
                     final ServerInfo targetServerInfo = player.getServerInfo();
                     final ServerInfo senderServerInfo = ((ProxiedPlayer) sender).getServerInfo();
                     if (targetServerInfo != senderServerInfo) {
-                        ((ProxiedPlayer) sender).connect(targetServerInfo);
+                        player.connect(senderServerInfo);
                     } else sender.sendMessage(Language.get("player.same.server", args[0]));
-                } else sender.sendMessage(Language.get("player.not.found", args[0]));
+                } else sender.sendMessage(Language.get("player.not.found"));
                 return true;
             }
         }

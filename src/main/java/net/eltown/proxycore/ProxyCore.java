@@ -1,15 +1,27 @@
 package net.eltown.proxycore;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
 import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
 import dev.waterdog.waterdogpe.event.defaults.PlayerDisconnectEvent;
 import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
 import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import net.eltown.proxycore.commands.*;
+import net.eltown.proxycore.commands.administration.AnnounceCommand;
+import net.eltown.proxycore.commands.administration.BringmeCommand;
+import net.eltown.proxycore.commands.administration.JumptoCommand;
+import net.eltown.proxycore.commands.administration.WhereisCommand;
 import net.eltown.proxycore.commands.discord.AuthCommand;
+import net.eltown.proxycore.components.handlers.BanHandler;
+import net.eltown.proxycore.components.handlers.MuteHandler;
+import net.eltown.proxycore.components.handlers.WarnHandler;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.messaging.CoreListener;
 import net.eltown.proxycore.components.messaging.GroupListener;
+import net.eltown.proxycore.components.messaging.GuardianListener;
 import net.eltown.proxycore.components.messaging.TeleportationListener;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbit;
 import net.eltown.proxycore.listeners.EventListener;
@@ -19,9 +31,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Getter
 public class ProxyCore extends Plugin {
+
+    private MongoClient databaseClient;
+    private MongoDatabase database;
 
     private EventListener listener;
 
@@ -29,6 +46,11 @@ public class ProxyCore extends Plugin {
     private GroupListener groupListener;
     private TeleportationListener teleportationListener;
     private CoreListener coreListener;
+    private GuardianListener guardianListener;
+
+    private BanHandler banHandler;
+    private MuteHandler muteHandler;
+    private WarnHandler warnHandler;
 
     public final HashMap<String, String> cachedRankedPlayers = new HashMap<>();
     public final HashMap<String, String> cachedGroupPrefix = new HashMap<>();
@@ -36,18 +58,28 @@ public class ProxyCore extends Plugin {
     @Override
     public void onEnable() {
         try {
-            this.tinyRabbit = new TinyRabbit("localhost", "ProxyCore");
-            this.groupListener = new GroupListener(this);
-            this.teleportationListener = new TeleportationListener(this);
-            this.coreListener = new CoreListener(this);
             this.loadPlugin();
+            this.getLogger().info("§aProxyCore erfolgreich initialisiert.");
         } catch (final Exception e) {
             e.printStackTrace();
+            this.getLogger().error("§4Fehler beim initialisieren des ProxyCores.");
         }
     }
 
+    @SneakyThrows
     private void loadPlugin() {
+        this.connectDatabase();
         Language.init(this);
+
+        this.tinyRabbit = new TinyRabbit("localhost", "ProxyCore");
+        this.groupListener = new GroupListener(this);
+        this.teleportationListener = new TeleportationListener(this);
+        this.coreListener = new CoreListener(this);
+        this.guardianListener = new GuardianListener(this);
+
+        this.banHandler = new BanHandler(this, this.database);
+        this.muteHandler = new MuteHandler(this, this.database);
+        this.warnHandler = new WarnHandler(this, this.database);
 
         this.listener = new EventListener(this);
         this.getProxy().getEventManager().subscribe(PlayerLoginEvent.class, this.listener::onLogin);
@@ -61,6 +93,14 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
+    }
+
+    private void connectDatabase() {
+        final MongoClientURI clientURI = new MongoClientURI("mongodb://root:Qco7TDqoYq3RXq4pA3y7ETQTK6AgqzmTtRGLsgbN@45.138.50.23:27017/admin?authSource=admin");
+        this.databaseClient = new MongoClient(clientURI);
+        this.database = databaseClient.getDatabase("eltown");
+        final Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.OFF);
     }
 
     public String createId(final int i) {
@@ -89,6 +129,43 @@ public class ProxyCore extends Plugin {
         Date now = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy HH:mm");
         return dateFormat.format(now);
+    }
+
+    public String getRemainingTimeFuture(final long duration) {
+        if (duration == -1L) {
+            return "Permanent";
+        } else {
+            final SimpleDateFormat today = new SimpleDateFormat("dd.MM.yyyy");
+            today.format(System.currentTimeMillis());
+            final SimpleDateFormat future = new SimpleDateFormat("dd.MM.yyyy");
+            future.format(duration);
+            final long time = future.getCalendar().getTimeInMillis() - today.getCalendar().getTimeInMillis();
+            final int days = (int) (time / 86400000L);
+            final int hours = (int) (time / 3600000L % 24L);
+            final int minutes = (int) (time / 60000L % 60L);
+            String day = "Tage";
+            if (days == 1) {
+                day = "Tag";
+            }
+
+            String hour = "Stunden";
+            if (hours == 1) {
+                hour = "Stunde";
+            }
+
+            String minute = "Minuten";
+            if (minutes == 1) {
+                minute = "Minute";
+            }
+
+            if (minutes < 1 && days == 0 && hours == 0) {
+                return "Wenige Augenblicke";
+            } else if (hours == 0 && days == 0) {
+                return minutes + " " + minute;
+            } else {
+                return days == 0 ? hours + " " + hour + " " + minutes + " " + minute : days + " " + day + " " + hours + " " + hour + " " + minutes + " " + minute;
+            }
+        }
     }
 
 }

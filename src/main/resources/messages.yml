@@ -1,5 +1,8 @@
 prefix: "&8» &fCore &8| &7"
 
+banhandler.disconnect: "&cDu wurdest gebannt!\n&6ID: &7[0] &8| &6Grund: &7[1]\n&6Verbleibend: &7[2]"
+mutehandler.muted: "&7\n&2Du wurdest aus dem Chat gebannt!\n&2ID: &0[0] &f| &2Grund: &0[1]\n&2Verbleibend: &0[2]"
+
 player.joined: "§8» §f[0] §8| §7hat das Spiel betreten."
 player.quit: "§8» §f[0] §8| §7hat das Spiel verlassen."
 

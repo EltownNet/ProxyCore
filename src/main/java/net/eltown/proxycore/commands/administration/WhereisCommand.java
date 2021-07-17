@@ -1,4 +1,4 @@
-package net.eltown.proxycore.commands;
+package net.eltown.proxycore.commands.administration;
 
 import dev.waterdog.waterdogpe.command.Command;
 import dev.waterdog.waterdogpe.command.CommandSender;

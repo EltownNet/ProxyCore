@@ -7,6 +7,7 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.GroupCalls;
+import net.eltown.proxycore.components.data.PunishmentDocument;
 import net.eltown.proxycore.components.language.Language;
 
 import java.util.concurrent.CompletableFuture;
@@ -24,18 +25,43 @@ public class EventListener {
         });
 
         CompletableFuture.runAsync(() -> {
-            try {
-                this.instance.getTinyRabbit().sendAndReceive((delivery -> {
-                    switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
-                        case CALLBACK_FULL_GROUP_PLAYER:
-                            final String group = delivery.getData()[1];
-                            this.instance.cachedRankedPlayers.put(player.getName(), group);
-                            break;
-                    }
-                }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+            this.instance.getBanHandler().isActiveBan(player.getName(), isBanned -> {
+                if (isBanned) {
+                    this.instance.getBanHandler().getActiveBanEntryByTarget(player.getName(), punishmentDocument -> {
+                        if (punishmentDocument.getDuration() < System.currentTimeMillis()) {
+                            this.instance.getBanHandler().cancelBan(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {
+                            });
+                        } else {
+                            player.disconnect(Language.getNP("banhandler.disconnect", punishmentDocument.getId(), punishmentDocument.getReason(), this.instance.getRemainingTimeFuture(punishmentDocument.getDuration())));
+                        }
+                    });
+                } else {
+                    this.instance.getMuteHandler().isActiveMute(player.getName(), e -> {
+                        if (e) {
+                            this.instance.getMuteHandler().getActiveMuteEntryByTarget(player.getName(), punishmentDocument -> {
+                                if (punishmentDocument.getDuration() < System.currentTimeMillis()) {
+                                    this.instance.getMuteHandler().cancelMute(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {});
+                                } else {
+                                    this.instance.getMuteHandler().cachedActiveMutes.put(player.getName(), punishmentDocument);
+                                }
+                            });
+                        }
+                    });
+                    this.instance.getTinyRabbit().sendAndReceive((delivery -> {
+                        switch (GroupCalls.valueOf(delivery.getKey().toUpperCase())) {
+                            case CALLBACK_FULL_GROUP_PLAYER:
+                                final String group = delivery.getData()[1];
+                                this.instance.cachedRankedPlayers.put(player.getName(), group);
+                                break;
+                        }
+                    }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
+
+
+                    this.instance.getProxy().getPlayers().values().forEach((p) -> {
+                        p.sendMessage(Language.getNP("player.joined", player.getName()));
+                    });
+                }
+            });
         });
     }
 
@@ -51,12 +77,23 @@ public class EventListener {
         final ProxiedPlayer player = event.getPlayer();
         final String message = event.getMessage();
 
-        this.instance.getProxy().getPlayers().values().forEach(e -> {
-            e.sendMessage(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
-        });
-        this.instance.getLogger().info(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
+        if (this.instance.getMuteHandler().cachedActiveMutes.containsKey(player.getName())) {
+            final PunishmentDocument punishmentDocument = this.instance.getMuteHandler().cachedActiveMutes.get(player.getName());
+            if (punishmentDocument.getDuration() < System.currentTimeMillis()) {
+                this.instance.getMuteHandler().cancelMute(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {
+                });
+            } else {
+                player.sendMessage(Language.getNP("mutehandler.muted", punishmentDocument.getId(), punishmentDocument.getReason(), this.instance.getRemainingTimeFuture(punishmentDocument.getDuration())));
+                event.setCancelled(true);
+            }
+        } else {
+            this.instance.getProxy().getPlayers().values().forEach(e -> {
+                e.sendMessage(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
+            });
+            this.instance.getLogger().info("[CHAT] [" + player.getName() + "] " + message.replace("§", "&"));
 
-        event.setCancelled(true);
+            event.setCancelled(true);
+        }
     }
 
 }
