@@ -20,10 +20,6 @@ public class EventListener {
     public void onLogin(final PlayerLoginEvent event) {
         final ProxiedPlayer player = event.getPlayer();
 
-        this.instance.getProxy().getPlayers().values().forEach((p) -> {
-            p.sendMessage(Language.getNP("player.joined", player.getName()));
-        });
-
         CompletableFuture.runAsync(() -> {
             this.instance.getBanHandler().isActiveBan(player.getName(), isBanned -> {
                 if (isBanned) {
