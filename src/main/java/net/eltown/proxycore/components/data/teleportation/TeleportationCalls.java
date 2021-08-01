@@ -1,4 +1,4 @@
-package net.eltown.proxycore.components.data;
+package net.eltown.proxycore.components.data.teleportation;
 
 public enum TeleportationCalls {
 

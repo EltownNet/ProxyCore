@@ -1,4 +1,4 @@
-package net.eltown.proxycore.components.data;
+package net.eltown.proxycore.components.data.guardian;
 
 public enum GuardianCalls {
 

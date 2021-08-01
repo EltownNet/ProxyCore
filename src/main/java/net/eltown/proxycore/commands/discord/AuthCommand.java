@@ -5,7 +5,7 @@ import dev.waterdog.waterdogpe.command.CommandSender;
 import dev.waterdog.waterdogpe.command.CommandSettings;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.AuthCalls;
+import net.eltown.proxycore.components.data.auth.AuthCalls;
 import net.eltown.proxycore.components.language.Language;
 
 public class AuthCommand extends Command {

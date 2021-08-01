@@ -2,8 +2,8 @@ package net.eltown.proxycore.components.messaging;
 
 import lombok.SneakyThrows;
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.GuardianCalls;
-import net.eltown.proxycore.components.data.PunishmentLogDocument;
+import net.eltown.proxycore.components.data.guardian.GuardianCalls;
+import net.eltown.proxycore.components.data.guardian.PunishmentLogDocument;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 
 import java.util.LinkedList;

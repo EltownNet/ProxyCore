@@ -4,9 +4,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.GuardianCalls;
-import net.eltown.proxycore.components.data.PunishmentDocument;
-import net.eltown.proxycore.components.data.PunishmentLogDocument;
+import net.eltown.proxycore.components.data.guardian.GuardianCalls;
+import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
+import net.eltown.proxycore.components.data.guardian.PunishmentLogDocument;
 import net.eltown.proxycore.components.language.Language;
 import org.bson.Document;
 

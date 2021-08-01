@@ -2,7 +2,7 @@ package net.eltown.proxycore.components.messaging;
 
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.TeleportationCalls;
+import net.eltown.proxycore.components.data.teleportation.TeleportationCalls;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 

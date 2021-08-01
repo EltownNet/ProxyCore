@@ -6,8 +6,8 @@ import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.GroupCalls;
-import net.eltown.proxycore.components.data.PunishmentDocument;
+import net.eltown.proxycore.components.data.groups.GroupCalls;
+import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
 import net.eltown.proxycore.components.language.Language;
 
 import java.util.concurrent.CompletableFuture;

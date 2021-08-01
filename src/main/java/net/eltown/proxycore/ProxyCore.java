@@ -10,7 +10,6 @@ import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.eltown.proxycore.commands.*;
-import net.eltown.proxycore.commands.administration.AnnounceCommand;
 import net.eltown.proxycore.commands.administration.BringmeCommand;
 import net.eltown.proxycore.commands.administration.JumptoCommand;
 import net.eltown.proxycore.commands.administration.WhereisCommand;
@@ -89,7 +88,6 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand("jumpto", new JumptoCommand(this));
         this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
         this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
-        this.getProxy().getCommandMap().registerCommand("announce", new AnnounceCommand(this));
         this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));

@@ -1,4 +1,4 @@
-package net.eltown.proxycore.components.data;
+package net.eltown.proxycore.components.data.groups;
 
 public enum GroupCalls {
 

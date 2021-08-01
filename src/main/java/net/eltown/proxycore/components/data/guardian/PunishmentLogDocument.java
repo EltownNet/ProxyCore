@@ -1,15 +1,16 @@
-package net.eltown.proxycore.components.data;
+package net.eltown.proxycore.components.data.guardian;
 
 import lombok.Data;
 
 @Data
-public class PunishmentDocument {
+public class PunishmentLogDocument {
 
     private final String id;
+    private final String logId;
     private final String target;
     private final String reason;
     private final String executor;
     private final String date;
-    private final long duration;
-
+    private final long timeEnd;
+    private final long timeStart;
 }

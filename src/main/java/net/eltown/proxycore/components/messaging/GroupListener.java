@@ -1,7 +1,7 @@
 package net.eltown.proxycore.components.messaging;
 
 import net.eltown.proxycore.ProxyCore;
-import net.eltown.proxycore.components.data.GroupCalls;
+import net.eltown.proxycore.components.data.groups.GroupCalls;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 
 import java.util.Arrays;
