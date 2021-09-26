@@ -7,6 +7,7 @@ import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.guardian.GuardianCalls;
 import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
 import net.eltown.proxycore.components.data.guardian.PunishmentLogDocument;
+import net.eltown.proxycore.components.tinyrabbit.Queue;
 import org.bson.Document;
 
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class MuteHandler {
                 this.cachedActiveMutes.put(player.getName(), new PunishmentDocument(id, target, reason, executor, this.proxyCore.getDate(), duration));
             }
 
-            this.proxyCore.getTinyRabbit().send("guardian_discord", GuardianCalls.REQUEST_INITIATE_MUTE.name(), id, target, reason, executor, String.valueOf(duration));
+            this.proxyCore.getTinyRabbit().send(Queue.DISCORD_GUARDIAN_GUARDIAN, GuardianCalls.REQUEST_INITIATE_MUTE.name(), id, target, reason, executor, String.valueOf(duration));
             consumer.accept(id);
         });
     }
@@ -91,7 +92,7 @@ public class MuteHandler {
                 this.cachedActiveMutes.remove(player.getName());
             }
 
-            this.proxyCore.getTinyRabbit().send("guardian_discord", GuardianCalls.REQUEST_CANCEL_MUTE.name(), setId, document.getString("_id"), target, reason, executor);
+            this.proxyCore.getTinyRabbit().send(Queue.DISCORD_GUARDIAN_GUARDIAN, GuardianCalls.REQUEST_CANCEL_MUTE.name(), setId, document.getString("_id"), target, reason, executor);
             this.initiateUnmuteLog(target, document.getString("_id"), reason, executor, setId);
         });
     }

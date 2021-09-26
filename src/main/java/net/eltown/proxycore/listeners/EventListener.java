@@ -50,7 +50,7 @@ public class EventListener {
                                 this.instance.cachedRankedPlayers.put(player.getName(), group);
                                 break;
                         }
-                    }), "groups", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
+                    }), "api.groupmanager.main", GroupCalls.REQUEST_FULL_GROUP_PLAYER.name(), player.getName());
 
 
                     this.instance.getProxy().getPlayers().values().forEach((p) -> {

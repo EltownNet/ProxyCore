@@ -70,7 +70,7 @@ public class ProxyCore extends Plugin {
         this.connectDatabase();
         Language.init(this);
 
-        this.tinyRabbit = new TinyRabbit("localhost", "ProxyCore");
+        this.tinyRabbit = new TinyRabbit("localhost", "Core/Proxy/System[Main]");
         this.groupListener = new GroupListener(this);
         this.teleportationListener = new TeleportationListener(this);
         this.coreListener = new CoreListener(this);

@@ -44,7 +44,7 @@ public class TeleportationListener {
                     player2.sendMessage(Language.get("tpa.notification", delivery.getData()[1]));
                     break;
             }
-        }), "ProxyCore/Teleportation/Listener", "proxy.teleportation");
+        }), "Core/Proxy/Teleportation[Receive]", "core.proxy.teleportation.receive");
     }
 
 }

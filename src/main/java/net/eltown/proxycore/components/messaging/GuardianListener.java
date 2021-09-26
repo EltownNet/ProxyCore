@@ -175,6 +175,6 @@ public class GuardianListener {
                     });
                     break;
             }
-        }), "Guardian/Proxy", "guardian");
+        }), "Core/Proxy/Guardian[Main]", "core.proxy.guardian.main");
     }
 }

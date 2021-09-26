@@ -8,6 +8,7 @@ import net.eltown.proxycore.components.data.guardian.GuardianCalls;
 import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
 import net.eltown.proxycore.components.data.guardian.PunishmentLogDocument;
 import net.eltown.proxycore.components.language.Language;
+import net.eltown.proxycore.components.tinyrabbit.Queue;
 import org.bson.Document;
 
 import java.util.LinkedHashSet;
@@ -45,7 +46,7 @@ public class BanHandler {
                 player.disconnect(Language.getNP("banhandler.disconnect", id, reason, this.proxyCore.getRemainingTimeFuture(duration)));
             }
 
-            this.proxyCore.getTinyRabbit().send("guardian_discord", GuardianCalls.REQUEST_INITIATE_BAN.name(), id, target, reason, executor, String.valueOf(duration));
+            this.proxyCore.getTinyRabbit().send(Queue.DISCORD_GUARDIAN_GUARDIAN, GuardianCalls.REQUEST_INITIATE_BAN.name(), id, target, reason, executor, String.valueOf(duration));
             consumer.accept(id);
         });
     }
@@ -84,7 +85,7 @@ public class BanHandler {
             assert document != null;
             consumer.accept(setId);
 
-            this.proxyCore.getTinyRabbit().send("guardian_discord", GuardianCalls.REQUEST_CANCEL_BAN.name(), setId, document.getString("_id"), target, reason, executor);
+            this.proxyCore.getTinyRabbit().send(Queue.DISCORD_GUARDIAN_GUARDIAN, GuardianCalls.REQUEST_CANCEL_BAN.name(), setId, document.getString("_id"), target, reason, executor);
             this.initiateUnbanLog(target, document.getString("_id"), reason, executor, setId);
         });
     }

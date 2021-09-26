@@ -23,7 +23,7 @@ public class CoreListener {
             switch (CoreCalls.valueOf(delivery.getKey().toUpperCase())) {
 
             }
-        }), "ProxyCore/Teleportation/Listener", "proxy.receive");
+        }), "Core/Proxy/Core[Receive]", "core.proxy.core.receive");
         this.listener.callback((delivery -> {
             switch (CoreCalls.valueOf(delivery.getKey().toUpperCase())) {
                 case REQUEST_GET_ONLINE_PLAYERS:
@@ -48,7 +48,7 @@ public class CoreListener {
                     break;
 
             }
-        }), "ProxyCore/Core/Listener", "proxy.callback");
+        }), "Core/Proxy/Core[Callback]", "core.proxy.core.callback");
     }
 
 }
