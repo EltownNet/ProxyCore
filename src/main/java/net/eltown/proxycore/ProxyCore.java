@@ -8,6 +8,7 @@ import dev.waterdog.waterdogpe.event.defaults.PlayerDisconnectEvent;
 import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
 import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import net.eltown.proxycore.commands.*;
 import net.eltown.proxycore.commands.administration.BringmeCommand;
@@ -22,6 +23,7 @@ import net.eltown.proxycore.components.messaging.CoreListener;
 import net.eltown.proxycore.components.messaging.GroupListener;
 import net.eltown.proxycore.components.messaging.GuardianListener;
 import net.eltown.proxycore.components.messaging.TeleportationListener;
+import net.eltown.proxycore.components.tasks.AnnoucementTask;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbit;
 import net.eltown.proxycore.listeners.EventListener;
 
@@ -53,6 +55,10 @@ public class ProxyCore extends Plugin {
 
     public final HashMap<String, String> cachedRankedPlayers = new HashMap<>();
     public final HashMap<String, String> cachedGroupPrefix = new HashMap<>();
+
+    @Getter
+    @Setter
+    private long lastMessage;
 
     @Override
     public void onEnable() {
@@ -91,6 +97,8 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
+
+        new AnnoucementTask(this).start();
     }
 
     private void connectDatabase() {

@@ -85,6 +85,7 @@ public class EventListener {
         } else {
             this.instance.getProxy().getPlayers().values().forEach(e -> {
                 e.sendMessage(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", player.getName()) + " §8» §f" + message);
+                this.instance.setLastMessage(System.currentTimeMillis());
             });
             this.instance.getLogger().info("[CHAT] [" + player.getName() + "] " + message.replace("§", "&"));
 
