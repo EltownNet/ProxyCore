@@ -27,11 +27,13 @@ public class EventListener {
                         if (punishmentDocument.getDuration() < System.currentTimeMillis()) {
                             this.instance.getBanHandler().cancelBan(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {
                             });
+                            this.instance.getPlaytimeHandler().setOnline(player.getName());
                         } else {
                             player.disconnect(Language.getNP("banhandler.disconnect", punishmentDocument.getId(), punishmentDocument.getReason(), this.instance.getRemainingTimeFuture(punishmentDocument.getDuration())));
                         }
                     });
                 } else {
+                    this.instance.getPlaytimeHandler().setOnline(player.getName());
                     this.instance.getMuteHandler().isActiveMute(player.getName(), e -> {
                         if (e) {
                             this.instance.getMuteHandler().getActiveMuteEntryByTarget(player.getName(), punishmentDocument -> {
@@ -63,6 +65,7 @@ public class EventListener {
 
     public void onQuit(final PlayerDisconnectEvent event) {
         final ProxiedPlayer player = event.getPlayer();
+        this.instance.getPlaytimeHandler().setOffline(event.getPlayer().getName());
 
         this.instance.getProxy().getPlayers().values().forEach((p) -> {
             p.sendMessage(Language.getNP("player.quit", player.getName()));

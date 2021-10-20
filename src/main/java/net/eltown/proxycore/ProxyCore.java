@@ -12,17 +12,16 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import net.eltown.proxycore.commands.*;
 import net.eltown.proxycore.commands.administration.BringmeCommand;
+import net.eltown.proxycore.commands.administration.CheckPlaytimeCommand;
 import net.eltown.proxycore.commands.administration.JumptoCommand;
 import net.eltown.proxycore.commands.administration.WhereisCommand;
 import net.eltown.proxycore.commands.discord.AuthCommand;
 import net.eltown.proxycore.components.handlers.BanHandler;
 import net.eltown.proxycore.components.handlers.MuteHandler;
+import net.eltown.proxycore.components.handlers.PlaytimeHandler;
 import net.eltown.proxycore.components.handlers.WarnHandler;
 import net.eltown.proxycore.components.language.Language;
-import net.eltown.proxycore.components.messaging.CoreListener;
-import net.eltown.proxycore.components.messaging.GroupListener;
-import net.eltown.proxycore.components.messaging.GuardianListener;
-import net.eltown.proxycore.components.messaging.TeleportationListener;
+import net.eltown.proxycore.components.messaging.*;
 import net.eltown.proxycore.components.tasks.AnnoucementTask;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbit;
 import net.eltown.proxycore.listeners.EventListener;
@@ -48,17 +47,19 @@ public class ProxyCore extends Plugin {
     private TeleportationListener teleportationListener;
     private CoreListener coreListener;
     private GuardianListener guardianListener;
+    private PlaytimeListener playtimeListener;
 
     private BanHandler banHandler;
     private MuteHandler muteHandler;
     private WarnHandler warnHandler;
+    private PlaytimeHandler playtimeHandler;
 
     public final HashMap<String, String> cachedRankedPlayers = new HashMap<>();
     public final HashMap<String, String> cachedGroupPrefix = new HashMap<>();
 
-    @Getter
     @Setter
     private long lastMessage;
+
 
     @Override
     public void onEnable() {
@@ -81,10 +82,12 @@ public class ProxyCore extends Plugin {
         this.teleportationListener = new TeleportationListener(this);
         this.coreListener = new CoreListener(this);
         this.guardianListener = new GuardianListener(this);
+        this.playtimeListener = new PlaytimeListener(this);
 
         this.banHandler = new BanHandler(this, this.database);
         this.muteHandler = new MuteHandler(this, this.database);
         this.warnHandler = new WarnHandler(this, this.database);
+        this.playtimeHandler = new PlaytimeHandler(this, this.database);
 
         this.listener = new EventListener(this);
         this.getProxy().getEventManager().subscribe(PlayerLoginEvent.class, this.listener::onLogin);
@@ -95,6 +98,7 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
         this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
         this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
+        this.getProxy().getCommandMap().registerCommand(new CheckPlaytimeCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
 
