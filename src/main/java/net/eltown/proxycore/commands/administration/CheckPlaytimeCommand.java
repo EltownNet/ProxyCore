@@ -5,6 +5,7 @@ import dev.waterdog.waterdogpe.command.CommandSender;
 import dev.waterdog.waterdogpe.command.CommandSettings;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
+import net.eltown.proxycore.components.tools.ProxyTools;
 
 public class CheckPlaytimeCommand extends Command {
 
@@ -24,7 +25,7 @@ public class CheckPlaytimeCommand extends Command {
         if (sender.hasPermission(this.getPermission())) {
             if (args.length > 0) {
                 String target = args[0];
-                final ProxiedPlayer preTarget = this.findPlayer(target);
+                final ProxiedPlayer preTarget = ProxyTools.findPlayer(target);
                 if (preTarget != null) target = preTarget.getName();
 
                 final long[] playTime = this.core.getPlaytimeHandler().getPlaytime(target);
@@ -36,14 +37,4 @@ public class CheckPlaytimeCommand extends Command {
         return true;
     }
 
-    private ProxiedPlayer findPlayer(final String name) {
-        ProxiedPlayer startsWith = null;
-
-        for (final ProxiedPlayer player : core.getProxy().getPlayers().values()) {
-            if (player.getName().equalsIgnoreCase(name)) return player;
-            if (player.getName().toLowerCase().startsWith(name.toLowerCase())) startsWith = player;
-        }
-
-        return startsWith;
-    }
 }

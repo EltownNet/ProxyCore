@@ -4,6 +4,7 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.CoreCalls;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
+import net.eltown.proxycore.components.tools.ProxyTools;
 
 public class CoreListener {
 
@@ -42,7 +43,7 @@ public class CoreListener {
                     break;
                 case REQUEST_IS_PLAYER_ONLINE:
                     final String target = delivery.getData()[1];
-                    final ProxiedPlayer player = this.instance.getProxy().getPlayer(target);
+                    final ProxiedPlayer player = ProxyTools.findPlayer(target);
                     if (player == null) delivery.answer(CoreCalls.CALLBACK_NULL.name(), "null");
                     else delivery.answer(CoreCalls.CALLBACK_ONLINE.name(), "null");
                     break;

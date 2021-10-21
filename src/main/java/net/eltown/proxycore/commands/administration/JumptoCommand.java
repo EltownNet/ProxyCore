@@ -7,6 +7,7 @@ import dev.waterdog.waterdogpe.network.serverinfo.ServerInfo;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
+import net.eltown.proxycore.components.tools.ProxyTools;
 
 public class JumptoCommand extends Command {
 
@@ -25,7 +26,7 @@ public class JumptoCommand extends Command {
     public boolean onExecute(CommandSender sender, String s, String[] args) {
         if (sender.hasPermission(this.getPermission()) && sender instanceof ProxiedPlayer) {
             if (args.length == 1) {
-                final ProxiedPlayer player = this.proxyCore.getProxy().getPlayer(args[0]);
+                final ProxiedPlayer player = ProxyTools.findPlayer(args[0]);
                 if (player != null) {
                     final ServerInfo targetServerInfo = player.getServerInfo();
                     final ServerInfo senderServerInfo = ((ProxiedPlayer) sender).getServerInfo();

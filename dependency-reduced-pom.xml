@@ -94,7 +94,7 @@
           <groupId>net.minecrell</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>bedrock-v465</artifactId>
+          <artifactId>bedrock-v471</artifactId>
           <groupId>com.nukkitx.protocol</groupId>
         </exclusion>
         <exclusion>

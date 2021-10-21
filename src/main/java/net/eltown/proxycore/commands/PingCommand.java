@@ -34,6 +34,6 @@ public class PingCommand extends Command {
 
 
     private String color(final long ms) {
-        return ms > 499 ? "§4" : ms > 299 ? "§c" : ms > 199 ? "§6" : ms > 99 ? "§e" : ms > 49 ? "§2" : "§a";
+        return ms > 499 ? "§4" : ms > 299 ? "§c" : ms > 199 ? "§6" : ms > 99 ? "§e" : ms > 49 ? "§a" : "§2";
     }
 }
