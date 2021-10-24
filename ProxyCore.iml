@@ -27,29 +27,30 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.java.dev.jna:jna:4.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jline:jline-reader:3.9.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.minecrell:terminalconsoleappender:1.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v465:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v448:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v440:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v431:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v428:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v422:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v419:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v408:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v407:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v390:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v389:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v388:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v361:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v354:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v340:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v332:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v313:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v291:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-common:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:common:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:natives:1.0.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v471:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v465:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v448:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v440:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v431:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v428:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v422:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v419:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v408:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v407:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v390:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v389:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v388:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v361:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v354:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v340:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v332:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v313:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-v291:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:bedrock-common:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.protocol:common:2.9.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:natives:1.0.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:nbt:2.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:math:1.1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:math:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.fastutil:fastutil-int-object-maps:8.5.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.fastutil:fastutil-int-sets:8.5.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx.fastutil:fastutil-int-common:8.5.3" level="project" />

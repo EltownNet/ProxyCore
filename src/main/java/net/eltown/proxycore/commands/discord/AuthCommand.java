@@ -13,7 +13,7 @@ public class AuthCommand extends Command {
     private final ProxyCore proxyCore;
 
     public AuthCommand(final ProxyCore proxyCore) {
-        super("announce", CommandSettings.builder()
+        super("auth", CommandSettings.builder()
                 .setDescription("Verifiziere dich mit unserem Discord-Server")
                 .setUsageMessage("auth <Token>")
                 .build());
