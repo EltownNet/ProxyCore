@@ -22,7 +22,11 @@ public class CoreListener {
     public void startListening() {
         this.listener.receive((delivery -> {
             switch (CoreCalls.valueOf(delivery.getKey().toUpperCase())) {
-
+                case REQUEST_BROADCAST_PROXY_MESSAGE:
+                    this.instance.getProxy().getPlayers().values().forEach(e -> {
+                        e.sendMessage(delivery.getData()[1]);
+                    });
+                    break;
             }
         }), "Core/Proxy/Core[Receive]", "core.proxy.core.receive");
         this.listener.callback((delivery -> {
