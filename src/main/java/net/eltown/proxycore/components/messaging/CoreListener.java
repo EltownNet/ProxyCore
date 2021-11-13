@@ -27,6 +27,10 @@ public class CoreListener {
                         e.sendMessage(delivery.getData()[1]);
                     });
                     break;
+                case REQUEST_SEND_PLAYER_MESSAGE:
+                    final ProxiedPlayer player = this.instance.getProxy().getPlayer(delivery.getData()[1]);
+                    if (player != null) player.sendMessage(delivery.getData()[2]);
+                    break;
             }
         }), "Core/Proxy/Core[Receive]", "core.proxy.core.receive");
         this.listener.callback((delivery -> {
