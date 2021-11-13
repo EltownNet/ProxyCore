@@ -101,6 +101,8 @@ public class ProxyCore extends Plugin {
         this.getProxy().getCommandMap().registerCommand(new CheckPlaytimeCommand(this));
 
         this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
+        this.getProxy().getCommandMap().registerCommand("msg", new MessageCommand(this));
+        this.getProxy().getCommandMap().registerCommand("reply", new ReplyCommand(this));
 
         new AnnoucementTask(this).start();
     }
