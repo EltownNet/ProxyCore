@@ -1,10 +1,10 @@
 package net.eltown.proxycore.components.messaging;
 
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.CoreCalls;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 import net.eltown.proxycore.components.tools.ProxyTools;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class CoreListener {
 
@@ -23,7 +23,7 @@ public class CoreListener {
         this.listener.receive((delivery -> {
             switch (CoreCalls.valueOf(delivery.getKey().toUpperCase())) {
                 case REQUEST_BROADCAST_PROXY_MESSAGE:
-                    this.instance.getProxy().getPlayers().values().forEach(e -> {
+                    this.instance.getProxy().getPlayers().forEach(e -> {
                         e.sendMessage(delivery.getData()[1]);
                     });
                     break;
@@ -39,7 +39,7 @@ public class CoreListener {
                     try {
                         final StringBuilder builder = new StringBuilder();
 
-                        for (final ProxiedPlayer s : this.instance.getProxy().getPlayers().values()) {
+                        for (final ProxiedPlayer s : this.instance.getProxy().getPlayers()) {
                             builder.append(s.getName()).append("#");
                         }
 

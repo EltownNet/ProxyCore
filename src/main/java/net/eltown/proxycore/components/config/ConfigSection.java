@@ -60,7 +60,7 @@ public class ConfigSection extends LinkedHashMap<String, Object> {
     }
 
     public Object get(String key) {
-        return this.get(key, (Object) null);
+        return this.get(key, null);
     }
 
     public <T> T get(String key, T defaultValue) {
@@ -108,11 +108,11 @@ public class ConfigSection extends LinkedHashMap<String, Object> {
     }
 
     public ConfigSection getSection(String key) {
-        return (ConfigSection) this.get(key, new ConfigSection());
+        return this.get(key, new ConfigSection());
     }
 
     public ConfigSection getSections() {
-        return this.getSections((String) null);
+        return this.getSections(null);
     }
 
     public ConfigSection getSections(String key) {
@@ -189,7 +189,7 @@ public class ConfigSection extends LinkedHashMap<String, Object> {
     }
 
     public boolean getBoolean(String key, boolean defaultValue) {
-        return (Boolean) this.get(key, defaultValue);
+        return this.get(key, defaultValue);
     }
 
     public boolean isBoolean(String key) {
@@ -198,11 +198,11 @@ public class ConfigSection extends LinkedHashMap<String, Object> {
     }
 
     public List getList(String key) {
-        return this.getList(key, (List) null);
+        return this.getList(key, null);
     }
 
     public List getList(String key, List defaultList) {
-        return (List) this.get(key, defaultList);
+        return this.get(key, defaultList);
     }
 
     public boolean isList(String key) {

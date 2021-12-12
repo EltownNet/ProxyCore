@@ -3,18 +3,11 @@ package net.eltown.proxycore;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
-import dev.waterdog.waterdogpe.event.defaults.PlayerChatEvent;
-import dev.waterdog.waterdogpe.event.defaults.PlayerDisconnectEvent;
-import dev.waterdog.waterdogpe.event.defaults.PlayerLoginEvent;
-import dev.waterdog.waterdogpe.plugin.Plugin;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import net.eltown.proxycore.commands.*;
-import net.eltown.proxycore.commands.administration.BringmeCommand;
 import net.eltown.proxycore.commands.administration.CheckPlaytimeCommand;
-import net.eltown.proxycore.commands.administration.JumptoCommand;
-import net.eltown.proxycore.commands.administration.WhereisCommand;
 import net.eltown.proxycore.commands.discord.AuthCommand;
 import net.eltown.proxycore.components.handlers.BanHandler;
 import net.eltown.proxycore.components.handlers.MuteHandler;
@@ -25,6 +18,7 @@ import net.eltown.proxycore.components.messaging.*;
 import net.eltown.proxycore.components.tasks.AnnoucementTask;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbit;
 import net.eltown.proxycore.listeners.EventListener;
+import net.md_5.bungee.api.plugin.Plugin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,7 +62,7 @@ public class ProxyCore extends Plugin {
             this.getLogger().info("§aProxyCore erfolgreich initialisiert.");
         } catch (final Exception e) {
             e.printStackTrace();
-            this.getLogger().error("§4Fehler beim initialisieren des ProxyCores.");
+            this.getLogger().warning("§4Fehler beim initialisieren des ProxyCores.");
         }
     }
 
@@ -89,20 +83,14 @@ public class ProxyCore extends Plugin {
         this.warnHandler = new WarnHandler(this, this.database);
         this.playtimeHandler = new PlaytimeHandler(this, this.database);
 
-        this.listener = new EventListener(this);
-        this.getProxy().getEventManager().subscribe(PlayerLoginEvent.class, this.listener::onLogin);
-        this.getProxy().getEventManager().subscribe(PlayerChatEvent.class, this.listener::onChat);
-        this.getProxy().getEventManager().subscribe(PlayerDisconnectEvent.class, this.listener::onQuit);
+        this.getProxy().getPluginManager().registerListener(this, new EventListener(this));
 
-        this.getProxy().getCommandMap().registerCommand("jumpto", new JumptoCommand(this));
-        this.getProxy().getCommandMap().registerCommand("bringme", new BringmeCommand(this));
-        this.getProxy().getCommandMap().registerCommand("whereis", new WhereisCommand(this));
-        this.getProxy().getCommandMap().registerCommand("ping", new PingCommand(this));
-        this.getProxy().getCommandMap().registerCommand(new CheckPlaytimeCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new PingCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new CheckPlaytimeCommand(this));
 
-        this.getProxy().getCommandMap().registerCommand("auth", new AuthCommand(this));
-        this.getProxy().getCommandMap().registerCommand("msg", new MessageCommand(this));
-        this.getProxy().getCommandMap().registerCommand("reply", new ReplyCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new AuthCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new MessageCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new ReplyCommand(this));
 
         new AnnoucementTask(this).start();
     }

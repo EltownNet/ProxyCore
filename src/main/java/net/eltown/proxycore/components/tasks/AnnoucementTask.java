@@ -14,12 +14,16 @@ public class AnnoucementTask {
     private final String prefix = "§8» §fInfo §8| §7";
     private final List<String> messages = Arrays.asList(
             "Unseren §9Discord §7findest du unter §9bit.ly/discord-et§7!",
-            "Du benötigst eine bessere §eChestShop-Lizenz§7? Dann vereinbare einen Termin im §eRathaus§7 mit §eFrau Bärwald§7!",
-            "Lust auf §eKryptowährungen§7? Dann probier doch mal §e/wallet§7!",
+            "Du benötigst eine bessere §eChestShop-Lizenz§7? Dann vereinbare einen Termin im §eRathaus§7!",
+            "Lust auf §eKryptowährungen§7? Dann probier doch mal §e/wallet §7aus!",
             "§2Farme Items §7oder erledige §2Quests§7, um dein §2Level §7zu steigern.",
             "Natürlich kann man bei §6ChestShops §7auch mit der §6Bankkarte §7bezahlen!",
             "Heute schon deine §dtägliche Belohnung §7bei §dLola §7abgeholt?",
-            "Bei §cFragen oder Problemen §7steht dir der §cSupport §7zur verfügung. §8[§c/support§8]"
+            "Heute schon für §dtolle Belohnungen §7gevotet? §8[§d/vote§8]",
+            "Verwalte deine §9Freunde §7auf Eltown mit §9/freunde§7.",
+            "Verifiziere deinen §bDiscord-Account §7mit deinem §bMinecraft-Account§7! §8[§b/auth§8]",
+            "Bei §cFragen oder Problemen §7steht dir der §cSupport §7zur Verfügung! §8[§c/support§8]",
+            "Bei §2Feedback und Vorschlägen §7steht dir der §2Support §7zur Verfügung! §8[§2/support§8]"
     );
 
     public AnnoucementTask(final ProxyCore core) {
@@ -34,7 +38,7 @@ public class AnnoucementTask {
             @Override
             public void run() {
                 if (core.getProxy().getPlayers().size() > 0 && core.getLastMessage() + 60000 < System.currentTimeMillis()) {
-                    core.getProxy().getPlayers().values().forEach((p) -> p.sendMessage(prefix + messages.get(ThreadLocalRandom.current().nextInt(messages.size()))));
+                    core.getProxy().getPlayers().forEach((p) -> p.sendMessage(prefix + messages.get(ThreadLocalRandom.current().nextInt(messages.size()))));
                 }
             }
         }, 1000 * 300, 1000 * 300);

@@ -1,27 +1,22 @@
 package net.eltown.proxycore.commands.administration;
 
-import dev.waterdog.waterdogpe.command.Command;
-import dev.waterdog.waterdogpe.command.CommandSender;
-import dev.waterdog.waterdogpe.command.CommandSettings;
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.tools.ProxyTools;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Command;
 
 public class CheckPlaytimeCommand extends Command {
 
     private final ProxyCore core;
 
     public CheckPlaytimeCommand(final ProxyCore proxyCore) {
-        super("checkplaytime", CommandSettings.builder()
-                .setDescription("Überprüfe die Spielzeit eines Spielers.")
-                .setPermission("proxycore.command.checkplaytime")
-                .setUsageMessage("checkplaytime <Spieler>")
-                .build());
+        super("checkplaytime", "proxycore.command.checkplaytime");
         this.core = proxyCore;
     }
 
     @Override
-    public boolean onExecute(CommandSender sender, String s, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (sender.hasPermission(this.getPermission())) {
             if (args.length > 0) {
                 String target = args[0];
@@ -32,9 +27,7 @@ public class CheckPlaytimeCommand extends Command {
                 sender.sendMessage("§7Spielzeit von §9" + target + "§r:");
                 sender.sendMessage("§0Gesamt: §r" + playTime[0] + "ms");
                 sender.sendMessage("§0Heute: §r" + playTime[1] + "ms");
-            } else sender.sendMessage(this.getUsageMessage());
+            }
         }
-        return true;
     }
-
 }

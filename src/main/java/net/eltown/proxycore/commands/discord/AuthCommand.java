@@ -1,27 +1,23 @@
 package net.eltown.proxycore.commands.discord;
 
-import dev.waterdog.waterdogpe.command.Command;
-import dev.waterdog.waterdogpe.command.CommandSender;
-import dev.waterdog.waterdogpe.command.CommandSettings;
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.auth.AuthCalls;
 import net.eltown.proxycore.components.language.Language;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Command;
 
 public class AuthCommand extends Command {
 
     private final ProxyCore proxyCore;
 
     public AuthCommand(final ProxyCore proxyCore) {
-        super("auth", CommandSettings.builder()
-                .setDescription("Verifiziere dich mit unserem Discord-Server")
-                .setUsageMessage("auth <Token>")
-                .build());
+        super("auth");
         this.proxyCore = proxyCore;
     }
 
     @Override
-    public boolean onExecute(CommandSender sender, String s, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (sender instanceof ProxiedPlayer) {
             final ProxiedPlayer player = (ProxiedPlayer) sender;
             if (args.length == 1) {
@@ -40,9 +36,6 @@ public class AuthCommand extends Command {
                     }
                 }), "discord.bot.auth", AuthCalls.REQUEST_SOLVE_AUTH.name(), token, player.getName());
             } else player.sendMessage(Language.get("token.usage"));
-            return true;
         }
-        return false;
     }
-
 }

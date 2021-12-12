@@ -1,7 +1,7 @@
 package net.eltown.proxycore.components.language;
 
-import dev.waterdog.waterdogpe.plugin.Plugin;
 import net.eltown.proxycore.components.config.Config;
+import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Map;

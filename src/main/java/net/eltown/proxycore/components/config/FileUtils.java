@@ -25,7 +25,7 @@ public class FileUtils {
     }
 
     public static void writeFile(File file, String content) throws IOException {
-        writeFile((File)file, (InputStream)(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8))));
+        writeFile(file, new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
     }
 
     public static void writeFile(File file, InputStream content) throws IOException {
@@ -70,7 +70,7 @@ public class FileUtils {
 
     public static String readFile(File file) throws IOException {
         if (file.exists() && !file.isDirectory()) {
-            return readFile((InputStream)(new FileInputStream(file)));
+            return readFile(new FileInputStream(file));
         } else {
             throw new FileNotFoundException();
         }
@@ -79,14 +79,14 @@ public class FileUtils {
     public static String readFile(String filename) throws IOException {
         File file = new File(filename);
         if (file.exists() && !file.isDirectory()) {
-            return readFile((InputStream)(new FileInputStream(file)));
+            return readFile(new FileInputStream(file));
         } else {
             throw new FileNotFoundException();
         }
     }
 
     public static String readFile(InputStream inputStream) throws IOException {
-        return readFile((Reader)(new InputStreamReader(inputStream, StandardCharsets.UTF_8)));
+        return readFile(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
     }
 
     private static String readFile(Reader reader) throws IOException {
@@ -267,10 +267,10 @@ public class FileUtils {
     }
 
     public static long toRGB(byte r, byte g, byte b, byte a) {
-        long result = (long)(r & 255);
-        result |= (long)((g & 255) << 8);
-        result |= (long)((b & 255) << 16);
-        result |= (long)((a & 255) << 24);
+        long result = r & 255;
+        result |= (g & 255) << 8;
+        result |= (b & 255) << 16;
+        result |= (a & 255) << 24;
         return result & 4294967295L;
     }
 
@@ -283,7 +283,7 @@ public class FileUtils {
 
     public static Object[][] splitArray(Object[] arrayToSplit, int chunkSize) {
         if (chunkSize <= 0) {
-            return (Object[][])null;
+            return null;
         } else {
             int rest = arrayToSplit.length % chunkSize;
             int chunks = arrayToSplit.length / chunkSize + (rest > 0 ? 1 : 0);
@@ -324,7 +324,7 @@ public class FileUtils {
     }
 
     public static <T> T[][] clone2dArray(T[][] array) {
-        T[][] newArray = (T[][]) Arrays.copyOf(array, array.length);
+        T[][] newArray = Arrays.copyOf(array, array.length);
 
         for(int i = 0; i < array.length; ++i) {
             newArray[i] = Arrays.copyOf(array[i], array[i].length);
@@ -334,16 +334,16 @@ public class FileUtils {
     }
 
     public static <T, U, V> Map<U, V> getOrCreate(Map<T, Map<U, V>> map, T key) {
-        Map<U, V> existing = (Map)map.get(key);
+        Map<U, V> existing = map.get(key);
         if (existing == null) {
             ConcurrentHashMap<U, V> toPut = new ConcurrentHashMap();
-            existing = (Map)map.putIfAbsent(key, toPut);
+            existing = map.putIfAbsent(key, toPut);
             if (existing == null) {
                 existing = toPut;
             }
         }
 
-        return (Map)existing;
+        return existing;
     }
 
     public static <T, U, V extends U> U getOrCreate(Map<T, U> map, Class<V> clazz, T key) {

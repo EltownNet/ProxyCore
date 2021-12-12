@@ -1,6 +1,5 @@
 package net.eltown.proxycore.components.messaging;
 
-import lombok.RequiredArgsConstructor;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.playtime.PlaytimeCalls;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;

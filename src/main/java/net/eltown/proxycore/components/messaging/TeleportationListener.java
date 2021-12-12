@@ -1,11 +1,11 @@
 package net.eltown.proxycore.components.messaging;
 
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.teleportation.TeleportationCalls;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.tinyrabbit.TinyRabbitListener;
 import net.eltown.proxycore.components.tools.ProxyTools;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class TeleportationListener {
 
@@ -31,14 +31,14 @@ public class TeleportationListener {
                     } else {
                         final String[] p = d[2].split("##");
                         final ProxiedPlayer target = ProxyTools.findPlayer(p[1]);
-                        player.connect(target.getServerInfo());
+                        player.connect(target.getServer().getInfo());
                     }
                     break;
                 case REQUEST_TELEPORT_TPA:
                     final String[] g = delivery.getData();
                     final ProxiedPlayer target = ProxyTools.findPlayer(g[1]);
                     final ProxiedPlayer player1 = ProxyTools.findPlayer(g[2]);
-                    player1.connect(target.getServerInfo());
+                    player1.connect(target.getServer().getInfo());
                     break;
                 case REQUEST_TPA_NOTIFICATION:
                     final ProxiedPlayer player2 = ProxyTools.findPlayer(delivery.getData()[2]);

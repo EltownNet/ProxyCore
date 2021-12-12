@@ -2,13 +2,13 @@ package net.eltown.proxycore.components.handlers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.guardian.GuardianCalls;
 import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
 import net.eltown.proxycore.components.data.guardian.PunishmentLogDocument;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.tinyrabbit.Queue;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.bson.Document;
 
 import java.util.LinkedHashSet;

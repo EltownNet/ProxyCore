@@ -1,29 +1,22 @@
 package net.eltown.proxycore.commands;
 
-import dev.waterdog.waterdogpe.command.Command;
-import dev.waterdog.waterdogpe.command.CommandSender;
-import dev.waterdog.waterdogpe.command.CommandSettings;
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
-
-import java.util.Arrays;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Command;
 
 public class ReplyCommand extends Command {
 
     private final ProxyCore proxyCore;
 
     public ReplyCommand(final ProxyCore proxyCore) {
-        super("reply", CommandSettings.builder()
-                .setDescription("Antworte dem letzten Spieler, der dir eine private Nachricht gesendet hat")
-                .setUsageMessage("r <Nachricht>")
-                .setAliases(Arrays.asList("r", "aw").toArray(new String[]{}))
-                .build());
+        super("reply", "", "r");
         this.proxyCore = proxyCore;
     }
 
     @Override
-    public boolean onExecute(CommandSender sender, String s, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (sender instanceof ProxiedPlayer) {
             final ProxiedPlayer player = (ProxiedPlayer) sender;
             if (MessageCommand.reply.containsKey(player.getName())) {
@@ -37,8 +30,6 @@ public class ReplyCommand extends Command {
                     target.sendMessage("§8» §fMsg §8| §9" + player.getName() + " §7-> §f" + target.getName() + " §8» §f" + message);
                 } else player.sendMessage(Language.get("player.not.found", MessageCommand.reply.get(player.getName())));
             } else player.sendMessage("§8» §fMsg §8| §7Du kannst niemandem antworten.");
-            return true;
         }
-        return false;
     }
 }

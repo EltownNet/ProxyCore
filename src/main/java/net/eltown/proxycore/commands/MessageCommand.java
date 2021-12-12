@@ -1,14 +1,12 @@
 package net.eltown.proxycore.commands;
 
-import dev.waterdog.waterdogpe.command.Command;
-import dev.waterdog.waterdogpe.command.CommandSender;
-import dev.waterdog.waterdogpe.command.CommandSettings;
-import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.tools.ProxyTools;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Command;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class MessageCommand extends Command {
@@ -18,16 +16,12 @@ public class MessageCommand extends Command {
     public static HashMap<String, String> reply = new HashMap<>();
 
     public MessageCommand(final ProxyCore proxyCore) {
-        super("msg", CommandSettings.builder()
-                .setDescription("Sende einem Spieler eine private Nachricht")
-                .setUsageMessage("msg <Spieler> <Nachricht>")
-                .setAliases(Arrays.asList("message", "dm").toArray(new String[]{}))
-                .build());
+        super("msg", "", "message", "dm");
         this.proxyCore = proxyCore;
     }
 
     @Override
-    public boolean onExecute(CommandSender sender, String s, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (sender instanceof ProxiedPlayer) {
             if (args.length >= 2) {
                 final ProxiedPlayer player = (ProxiedPlayer) sender;
@@ -39,7 +33,6 @@ public class MessageCommand extends Command {
                 if (target != null) {
                     if (target.getName().equals(player.getName())) {
                         player.sendMessage("§8» §fMsg §8| §7Du kannst dir selber keine private Nachricht schreiben.");
-                        return true;
                     }
 
                     player.sendMessage("§8» §fMsg §8| §f" + player.getName() + " §7-> §9" + target.getName() + " §8» §f" + message);
@@ -50,8 +43,6 @@ public class MessageCommand extends Command {
                     reply.put(target.getName(), player.getName());
                 } else player.sendMessage(Language.get("player.not.found", args[0]));
             } else sender.sendMessage("§8» §fMsg §8| §7Nutze: /msg <Spieler> <Nachricht>");
-            return true;
         }
-        return false;
     }
 }

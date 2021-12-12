@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import dev.waterdog.waterdogpe.plugin.Plugin;
+import net.md_5.bungee.api.plugin.Plugin;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -176,7 +176,7 @@ public class Config {
                 }
 
                 if (format.containsKey(content)) {
-                    this.type = (Integer) format.get(content);
+                    this.type = format.get(content);
                 } else {
                     this.correct = false;
                 }
@@ -286,7 +286,7 @@ public class Config {
     }
 
     public Object get(String key) {
-        return this.get(key, (Object) null);
+        return this.get(key, null);
     }
 
     public <T> T get(String key, T defaultValue) {
@@ -370,7 +370,7 @@ public class Config {
     }
 
     public List getList(String key) {
-        return this.getList(key, (List) null);
+        return this.getList(key, null);
     }
 
     public List getList(String key, List defaultList) {
@@ -610,14 +610,14 @@ public class Config {
             case 1:
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
-                this.config = new ConfigSection((LinkedHashMap) gson.fromJson(content, (new TypeToken<LinkedHashMap<String, Object>>() {
+                this.config = new ConfigSection(gson.fromJson(content, (new TypeToken<LinkedHashMap<String, Object>>() {
                 }).getType()));
                 break;
             case 2:
                 DumperOptions dumperOptions = new DumperOptions();
                 dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
                 Yaml yaml = new Yaml(dumperOptions);
-                this.config = new ConfigSection((LinkedHashMap) yaml.loadAs(content, LinkedHashMap.class));
+                this.config = new ConfigSection(yaml.loadAs(content, LinkedHashMap.class));
                 break;
             case 3:
             case 4:
