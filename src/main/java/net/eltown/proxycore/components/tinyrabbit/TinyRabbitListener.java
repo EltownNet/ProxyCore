@@ -25,7 +25,7 @@ public class TinyRabbitListener {
         try {
             final Connection connection = factory.newConnection(connectionName);
             final Channel channel = connection.createChannel();
-            channel.queueDeclare(queue, false, false, false, null);
+            channel.queueDeclare("a2." + queue, false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 try {
@@ -36,7 +36,7 @@ public class TinyRabbitListener {
                 }
             };
 
-            channel.basicConsume(queue, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume("a2." + queue, true, deliverCallback, consumerTag -> { });
         } catch (final Exception ex) {
             if (this.throwExceptions) ex.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class TinyRabbitListener {
         try {
             final Connection connection = factory.newConnection(connectionName);
             final Channel channel = connection.createChannel();
-            channel.queueDeclare(queue, false, false, false, null);
+            channel.queueDeclare("a2." + queue, false, false, false, null);
 
             final DeliverCallback callback = (tag, delivery) -> {
                 try {
@@ -62,7 +62,7 @@ public class TinyRabbitListener {
                 }
             };
 
-            channel.basicConsume(queue, false, callback, (consumerTag -> {
+            channel.basicConsume("a2." + queue, false, callback, (consumerTag -> {
             }));
         } catch (final Exception ex) {
             if (this.throwExceptions) ex.printStackTrace();
