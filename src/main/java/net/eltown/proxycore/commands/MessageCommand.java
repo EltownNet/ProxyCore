@@ -33,6 +33,7 @@ public class MessageCommand extends Command {
                 if (target != null) {
                     if (target.getName().equals(player.getName())) {
                         player.sendMessage("§8» §fMsg §8| §7Du kannst dir selber keine private Nachricht schreiben.");
+                        return;
                     }
 
                     player.sendMessage("§8» §fMsg §8| §f" + player.getName() + " §7-> §9" + target.getName() + " §8» §f" + message);

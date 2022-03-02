@@ -5,20 +5,12 @@ import net.eltown.proxycore.ProxyCore;
 import net.eltown.proxycore.components.data.groups.GroupCalls;
 import net.eltown.proxycore.components.data.guardian.PunishmentDocument;
 import net.eltown.proxycore.components.language.Language;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.Connection;
-import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
-import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.api.score.Scoreboard;
-import net.md_5.bungee.api.score.Team;
 import net.md_5.bungee.event.EventHandler;
-import net.md_5.bungee.protocol.packet.ScoreboardDisplay;
-import net.md_5.bungee.protocol.packet.ScoreboardObjective;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -43,12 +35,15 @@ public class EventListener implements Listener {
                         }
                     });
                 } else {
+                    this.instance.getPlayerHandler().handlePlayerJoin(player);
+
                     this.instance.getPlaytimeHandler().setOnline(player.getName());
                     this.instance.getMuteHandler().isActiveMute(player.getName(), e -> {
                         if (e) {
                             this.instance.getMuteHandler().getActiveMuteEntryByTarget(player.getName(), punishmentDocument -> {
                                 if (punishmentDocument.getDuration() < System.currentTimeMillis()) {
-                                    this.instance.getMuteHandler().cancelMute(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {});
+                                    this.instance.getMuteHandler().cancelMute(player.getName(), "Ablauf der Bestrafung", "SYSTEM/PROXY", v -> {
+                                    });
                                 } else {
                                     this.instance.getMuteHandler().cachedActiveMutes.put(player.getName(), punishmentDocument);
                                 }
@@ -70,12 +65,6 @@ public class EventListener implements Listener {
                     });
                 }
             });
-
-            /*final Scoreboard scoreboard = player.getScoreboard();
-            final Team team = scoreboard.getTeam(player.getName());
-            team.setPrefix(this.instance.cachedGroupPrefix.get(this.instance.cachedRankedPlayers.get(player.getName())).replace("%p", ""));
-            team.addPlayer(player.getName());
-            player.getScoreboard().addTeam(team);*/
         });
     }
 

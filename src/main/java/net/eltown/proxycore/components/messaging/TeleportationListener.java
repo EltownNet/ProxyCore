@@ -27,6 +27,7 @@ public class TeleportationListener {
                 case REQUEST_TELEPORT_SERVER:
                     final String[] d = delivery.getData();
                     final ProxiedPlayer player = ProxyTools.findPlayer(d[1]);
+                    if (player == null) return;
                     final ServerInfo serverInfo = this.instance.getProxy().getServerInfo(d[2]);
                     player.connect(serverInfo);
                     break;
@@ -34,10 +35,12 @@ public class TeleportationListener {
                     final String[] g = delivery.getData();
                     final ProxiedPlayer target = ProxyTools.findPlayer(g[2]);
                     final ProxiedPlayer player1 = ProxyTools.findPlayer(g[1]);
+                    if (target == null || player1 == null) return;
                     player1.connect(target.getServer().getInfo());
                     break;
                 case REQUEST_TPA_NOTIFICATION:
                     final ProxiedPlayer player2 = ProxyTools.findPlayer(delivery.getData()[2]);
+                    if (player2 == null) return;
                     player2.sendMessage(Language.get("tpa.notification", delivery.getData()[1]));
                     break;
             }

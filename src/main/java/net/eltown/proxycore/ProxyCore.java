@@ -6,13 +6,12 @@ import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import net.eltown.proxycore.commands.*;
+import net.eltown.proxycore.commands.MessageCommand;
+import net.eltown.proxycore.commands.PingCommand;
+import net.eltown.proxycore.commands.ReplyCommand;
 import net.eltown.proxycore.commands.administration.CheckPlaytimeCommand;
 import net.eltown.proxycore.commands.discord.AuthCommand;
-import net.eltown.proxycore.components.handlers.BanHandler;
-import net.eltown.proxycore.components.handlers.MuteHandler;
-import net.eltown.proxycore.components.handlers.PlaytimeHandler;
-import net.eltown.proxycore.components.handlers.WarnHandler;
+import net.eltown.proxycore.components.handlers.*;
 import net.eltown.proxycore.components.language.Language;
 import net.eltown.proxycore.components.messaging.*;
 import net.eltown.proxycore.components.tasks.AnnoucementTask;
@@ -45,6 +44,7 @@ public class ProxyCore extends Plugin {
 
     private BanHandler banHandler;
     private MuteHandler muteHandler;
+    private PlayerHandler playerHandler;
     private WarnHandler warnHandler;
     private PlaytimeHandler playtimeHandler;
 
@@ -80,6 +80,7 @@ public class ProxyCore extends Plugin {
 
         this.banHandler = new BanHandler(this, this.database);
         this.muteHandler = new MuteHandler(this, this.database);
+        this.playerHandler = new PlayerHandler(this);
         this.warnHandler = new WarnHandler(this, this.database);
         this.playtimeHandler = new PlaytimeHandler(this, this.database);
 
@@ -96,7 +97,7 @@ public class ProxyCore extends Plugin {
     }
 
     private void connectDatabase() {
-        final MongoClientURI clientURI = new MongoClientURI("mongodb://root:Qco7TDqoYq3RXq4pA3y7ETQTK6AgqzmTtRGLsgbN@45.138.50.23:27017/admin?authSource=admin");
+        final MongoClientURI clientURI = new MongoClientURI("mongodb://root:Qco7TDqoYq3RXq4pA3y7ETQTK6AgqzmTtRGLsgbN@45.89.124.42:27017/admin?authSource=admin");
         this.databaseClient = new MongoClient(clientURI);
         this.database = databaseClient.getDatabase("eltown");
         final Logger mongoLogger = Logger.getLogger("org.mongodb.driver");

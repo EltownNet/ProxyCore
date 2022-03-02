@@ -1,8 +1,8 @@
 package net.eltown.proxycore.components.tinyrabbit;
 
 import com.rabbitmq.client.*;
-import net.eltown.proxycore.components.tinyrabbit.data.Request;
 import net.eltown.proxycore.components.tinyrabbit.data.Delivery;
+import net.eltown.proxycore.components.tinyrabbit.data.Request;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
@@ -36,7 +36,8 @@ public class TinyRabbitListener {
                 }
             };
 
-            channel.basicConsume("a2." + queue, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume("a2." + queue, true, deliverCallback, consumerTag -> {
+            });
         } catch (final Exception ex) {
             if (this.throwExceptions) ex.printStackTrace();
         }

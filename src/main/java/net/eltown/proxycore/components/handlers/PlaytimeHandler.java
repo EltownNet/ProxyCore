@@ -117,9 +117,9 @@ public class PlaytimeHandler {
 
                             coll.updateOne(new Document("_id", user),
                                     new Document("$set",
-                                    new Document("total", pt[0])
-                                            .append("today", pt[1])
-                            ));
+                                            new Document("total", pt[0])
+                                                    .append("today", pt[1])
+                                    ));
                         });
                     }
                 }, updated.getAndIncrement() * 50L);
