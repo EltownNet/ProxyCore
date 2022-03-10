@@ -56,6 +56,8 @@
                 <configuration>
                     <release>11</release>
                     <encoding>UTF-8</encoding>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>

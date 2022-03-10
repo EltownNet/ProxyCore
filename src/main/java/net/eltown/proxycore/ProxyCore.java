@@ -10,6 +10,7 @@ import net.eltown.proxycore.commands.MessageCommand;
 import net.eltown.proxycore.commands.PingCommand;
 import net.eltown.proxycore.commands.ReplyCommand;
 import net.eltown.proxycore.commands.administration.CheckPlaytimeCommand;
+import net.eltown.proxycore.commands.administration.KickCommand;
 import net.eltown.proxycore.commands.discord.AuthCommand;
 import net.eltown.proxycore.components.handlers.*;
 import net.eltown.proxycore.components.language.Language;
@@ -88,6 +89,7 @@ public class ProxyCore extends Plugin {
 
         this.getProxy().getPluginManager().registerCommand(this, new PingCommand(this));
         this.getProxy().getPluginManager().registerCommand(this, new CheckPlaytimeCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new KickCommand(this));
 
         this.getProxy().getPluginManager().registerCommand(this, new AuthCommand(this));
         this.getProxy().getPluginManager().registerCommand(this, new MessageCommand(this));
